@@ -19,13 +19,13 @@ public class FileService {
 
 		List<Recipe> recipe = new ArrayList<>();
 		try (Reader in = new FileReader("recipes.txt")) {
+
 			@SuppressWarnings("deprecation")
 			Iterable<CSVRecord> records = CSVFormat.DEFAULT
-			.withHeader("Cooking Minutes", "Dairy Free", "Gluten Free",
-					"Instructions", "Preparation Minutes", "Price Per Serving", "Ready In Minutes", "Servings",
-					"Spoonacular Score", "Title", "Vegan", "Vegetarian")
-			.withIgnoreSurroundingSpaces(true)
-			.parse(in);
+			        .withEscape('\\')
+					.withIgnoreSurroundingSpaces()
+					.withFirstRecordAsHeader()
+					.parse(in);
 
 			for (CSVRecord record : records) {
 				Recipe recipes = new Recipe();
